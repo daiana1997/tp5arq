@@ -9,7 +9,7 @@
         <header>
             <nav>
                 <a class="current" href="./">Home</a>
-                <a href="./usuario.php">Usuarios</a>
+                <a href="./users.php">Usuarios</a>
             </nav>
         </header>
 

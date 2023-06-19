@@ -8,7 +8,7 @@
         <header>
             <nav style="margin-top: 2rem;">
                 <a href="./">Home</a>
-                <a class="current" href="./usuario.php">Usuarios</a>
+                <a class="current" href="./users.php">Usuarios</a>
             </nav>
         </header>
 

@@ -2,7 +2,7 @@
 
 require_once 'print.php';
 
-function call_api($method, $url, $data = false, $contentType = false, $token = false){
+function call_api($method, $url, $data, $contentType = false, $token = false){
     $curl = curl_init();
     switch ($method){
        case "POST":

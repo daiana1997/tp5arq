@@ -1,6 +1,8 @@
 <?php
 
-function callAPI($method, $url, $data, $headers = false){
+require_once 'print.php';
+
+function call_api($method, $url, $data = false, $contentType = false, $token = false){
     $curl = curl_init();
     switch ($method){
        case "POST":
@@ -13,24 +15,24 @@ function callAPI($method, $url, $data, $headers = false){
           if ($data)
              curl_setopt($curl, CURLOPT_POSTFIELDS, $data);			 					
           break;
+       case "DELETE":
+            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "DELETE");
+            break;
+        case "PATCH":
+            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PATCH");
+            if ($data)
+                curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+            break;
        default:
           if ($data)
              $url = sprintf("%s?%s", $url, http_build_query($data));
     }
     // OPTIONS:
     curl_setopt($curl, CURLOPT_URL, $url);
-    if(!$headers){
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-           'APIKEY: 111111111111111111111',
-           'Content-Type: application/json',
-        ));
-    }else{
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-           'APIKEY: 111111111111111111111',
-           'Content-Type: application/json',
-           $headers
-        ));
-    }
+    curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+      'APIKEY: 111111111111111111111',
+      'Content-Type: application/json',
+  ));
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
  
@@ -39,5 +41,6 @@ function callAPI($method, $url, $data, $headers = false){
     if(!$result){die("Connection Failure");}
     curl_close($curl);
     return $result;
- } 
+ }
+
 ?>
